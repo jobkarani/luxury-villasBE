@@ -10,6 +10,7 @@ urlpatterns = [
     path('offer/', views.get_offer, name='offer'),
     path('experience/', views.get_experience, name='experience'),
     path('dining/', views.get_dining, name='dining'),
+    path('wedding/', views.get_wedding, name='wedding'),
     # path('api_products/', views.api_products, name='apiProducts' ),
     # path('getProductDetails/<int:product_id>/', views.getProductDetails, name='getProductDetails' ),
     # path('api_categoryproducts/<int:category_id>/', views.getProductsByCategory, name='apiCategoryproducts' ),

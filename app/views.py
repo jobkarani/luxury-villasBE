@@ -69,6 +69,13 @@ def get_dining(request):
         serializer = DiningSerializer(dining, many=True)
         return Response(serializer.data)
 
+@api_view(['GET',])
+def get_wedding(request):
+    if request.method == "GET":
+        wedding = Wedding.objects.all()
+        serializer = WeddingSerializer(wedding, many=True)
+        return Response(serializer.data)
+
 
 # @api_view(['GET'])
 # def getProductDetails(request, product_id):
