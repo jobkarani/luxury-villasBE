@@ -74,3 +74,10 @@ class Dining(models.Model):
 
     def __str__(self):
         return self.name
+
+class Wedding(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    description = models.TextField(max_length=4000, blank=False)
+
+    def __str__(self):
+        return self.name
