@@ -20,3 +20,8 @@ class OfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
         fields = ['id', 'name', 'slug','image', 'villa','price','description']
+
+class ExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Experience
+        fields = ['id', 'name', 'slug','image', 'country','description']
