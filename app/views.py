@@ -55,6 +55,13 @@ def get_offer(request):
         serializer = OfferSerializer(offer, many=True)
         return Response(serializer.data)
 
+@api_view(['GET',])
+def get_experience(request):
+    if request.method == "GET":
+        experience = Experience.objects.all()
+        serializer = ExperienceSerializer(experience, many=True)
+        return Response(serializer.data)
+
 
 # @api_view(['GET'])
 # def getProductDetails(request, product_id):
