@@ -4,8 +4,9 @@ from app import views
 urlpatterns = [
     path('', views.index, name='productsPage'),
     path('villas/', views.get_villas, name='villas'),
+    path('villaDetails/<int:villa_id>/', views.getVillaDetails, name='Villa Details' ),
     path('blogs/', views.get_blogs, name='blogs'),
-    path('getBlogDetails/<int:blog_id>/', views.getBlogDetails, name='Blog Details' ),
+    path('blogDetails/<int:blog_id>/', views.getBlogDetails, name='Blog Details' ),
     path('country/', views.get_country, name='country'),
     path('offer/', views.get_offer, name='offer'),
     path('experience/', views.get_experience, name='experience'),

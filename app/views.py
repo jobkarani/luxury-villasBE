@@ -28,6 +28,13 @@ def get_villas(request):
         return Response(serializer.data)
 
 @api_view(['GET'])
+def getVillaDetails(request, villa_id):
+    if request.method == "GET":
+        villas= Villa.objects.filter(id = villa_id)
+        serializer = VillaSerializer(villas, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
 def get_blogs(request):
     if request.method == "GET":
         blogs = Blogs.objects.all()
