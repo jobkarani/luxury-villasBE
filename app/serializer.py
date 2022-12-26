@@ -19,7 +19,7 @@ class CountrySerializer(serializers.ModelSerializer):
 class OfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
-        fields = ['id', 'name', 'slug','image', 'villa','price','description']
+        fields = ['id', 'name', 'slug','image', 'price','description']
 
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:

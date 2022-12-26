@@ -69,6 +69,13 @@ def get_offer(request):
         serializer = OfferSerializer(offer, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getOfferDetails(request, offer_id):
+    if request.method == "GET":
+        offer = Offer.objects.filter(id = offer_id)
+        serializer =OfferSerializer(offer, many=True)
+        return Response(serializer.data)
+
 @api_view(['GET',])
 def get_experience(request):
     if request.method == "GET":

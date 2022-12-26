@@ -48,7 +48,6 @@ class Offer(models.Model):
     name = models.CharField(max_length=100, blank=False)
     slug = models.SlugField(max_length=100, unique=True)
     image = ImageField( manual_crop="")
-    villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
     price = models.FloatField()
     description = models.TextField(max_length=4000)
 
