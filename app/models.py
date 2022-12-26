@@ -36,8 +36,8 @@ class Blogs(models.Model):
     def __str__(self):
         return self.heading
 
-class Destination(models.Model):
-    country = models.CharField(max_length=100, blank=False)
+class Country(models.Model):
+    name = models.CharField(max_length=100, blank=False)
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
 
     def __str__(self):
@@ -45,9 +45,20 @@ class Destination(models.Model):
 
 class Offer(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    image = ImageField( manual_crop="")
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
     price = models.FloatField()
     description = models.TextField(max_length=4000)
 
     def __str__(self):
         return self.name
+
+class Experience(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    country = models.ForeignKey(Country,on_delete=models.CASCADE)
+    description = models.TextField(max_length=4000)
+    image = ImageField( manual_crop="")
+
+    def __str__(self):
+        return self.name
+    
