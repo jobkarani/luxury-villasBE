@@ -62,6 +62,13 @@ def get_experience(request):
         serializer = ExperienceSerializer(experience, many=True)
         return Response(serializer.data)
 
+@api_view(['GET',])
+def get_dining(request):
+    if request.method == "GET":
+        dining = Dining.objects.all()
+        serializer = DiningSerializer(dining, many=True)
+        return Response(serializer.data)
+
 
 # @api_view(['GET'])
 # def getProductDetails(request, product_id):
