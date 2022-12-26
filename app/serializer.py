@@ -25,3 +25,13 @@ class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = ['id', 'name', 'slug','image', 'country','description']
+
+class DiningSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dining
+        fields = ['id', 'name', 'slug','heading', 'image','villa', 'description','timeline','email', 'phone']
+
+class WeddingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Wedding
+        fields = ['id', 'name', 'slug', 'description']
