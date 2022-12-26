@@ -55,6 +55,13 @@ def get_country(request):
         serializer = CountrySerializer(country, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getCountryDetails(request, country_id):
+    if request.method == "GET":
+        country = Country.objects.filter(id = country_id)
+        serializer = CountrySerializer(country, many=True)
+        return Response(serializer.data)
+
 @api_view(['GET',])
 def get_offer(request):
     if request.method == "GET":

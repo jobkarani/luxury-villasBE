@@ -42,7 +42,7 @@ class Country(models.Model):
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.country
+        return self.name
 
 class Offer(models.Model):
     name = models.CharField(max_length=100, blank=False)
