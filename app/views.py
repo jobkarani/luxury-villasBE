@@ -97,6 +97,13 @@ def get_dining(request):
         serializer = DiningSerializer(dining, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getDiningDetails(request, dining_id):
+    if request.method == "GET":
+        dining = Dining.objects.filter(id = dining_id)
+        serializer = DiningSerializer(dining, many=True)
+        return Response(serializer.data)
+
 @api_view(['GET',])
 def get_wedding(request):
     if request.method == "GET":
