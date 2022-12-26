@@ -27,12 +27,26 @@ def get_villas(request):
         serializer = VillaSerializer(villas, many=True)
         return Response(serializer.data)
 
-# @api_view(['GET',])
-# def api_categories(request):
-#     if request.method == "GET":
-#         categories = Category.objects.all()
-#         serializer = CategorySerializer(categories, many=True)
-#         return Response(serializer.data)
+@api_view(['GET'])
+def get_blogs(request):
+    if request.method == "GET":
+        blogs = Blogs.objects.all()
+        serializer = BlogsSerializer(blogs, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def getBlogDetails(request, blog_id):
+    if request.method == "GET":
+        blogs= Blogs.objects.filter(id = blog_id)
+        serializer = BlogsSerializer(blogs, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET',])
+def get_country(request):
+    if request.method == "GET":
+        country = Country.objects.all()
+        serializer = CountrySerializer(country, many=True)
+        return Response(serializer.data)
 
 
 # @api_view(['GET'])
@@ -51,16 +65,3 @@ def get_villas(request):
 #         serializer = ProductSerializer(products, many=True)
 #         return Response(serializer.data)
 
-@api_view(['GET'])
-def get_blogs(request):
-    if request.method == "GET":
-        blogs = Blogs.objects.all()
-        serializer = BlogsSerializer(blogs, many=True)
-        return Response(serializer.data)
-
-@api_view(['GET'])
-def getBlogDetails(request, blog_id):
-    if request.method == "GET":
-        blogs= Blogs.objects.filter(id = blog_id)
-        serializer = BlogsSerializer(blogs, many=True)
-        return Response(serializer.data)
