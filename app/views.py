@@ -125,6 +125,13 @@ def get_sustainability(request):
         serializer = SustainabilitySerializer(sustainability, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getSustainabilityDetails(request, sustainability_id):
+    if request.method == "GET":
+        sustainability = Dining.objects.filter(id = sustainability_id)
+        serializer = SustainabilitySerializer(sustainability, many=True)
+        return Response(serializer.data)
+
 
 # @api_view(['GET'])
 # def getProductDetails(request, product_id):
