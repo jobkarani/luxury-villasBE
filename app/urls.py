@@ -3,7 +3,7 @@ from app import views
 
 urlpatterns = [
     path('', views.index, name='productsPage'),
-    # path('emails/', views.send_mail, name='email'),
+    path('villas/', views.villas, name='villas'),
     path('get_blogs/', views.get_blogs, name='blogs'),
     # path('api_products/', views.api_products, name='apiProducts' ),
     # path('getProductDetails/<int:product_id>/', views.getProductDetails, name='getProductDetails' ),

@@ -20,19 +20,12 @@ def index(request):
     return render(request, 'products.html')
 
 
-# @api_view(['GET',])
-# def api_products(request):
-#     if request.method == "GET":
-#         products = Product.objects.all()
-
-#         # Set up pagination
-#         paginator = PageNumberPagination()
-#         paginator.page_size = 300
-#         result_page = paginator.paginate_queryset(products, request)
-
-#         # Serialize the result page
-#         serializer = ProductSerializer(result_page, many=True)
-#         return Response(serializer.data)
+@api_view(['GET',])
+def villas(request):
+    if request.method == "GET":
+        villas = Villa.objects.all()
+        serializer = VillaSerializer(villas, many=True)
+        return Response(serializer.data)
 
 # @api_view(['GET',])
 # def api_categories(request):
