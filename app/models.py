@@ -38,6 +38,7 @@ class Blogs(models.Model):
 
 class Country(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    slug = models.SlugField(max_length=100, unique=True)
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
 
     def __str__(self):
@@ -45,6 +46,7 @@ class Country(models.Model):
 
 class Offer(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    slug = models.SlugField(max_length=100, unique=True)
     image = ImageField( manual_crop="")
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
     price = models.FloatField()
@@ -55,6 +57,7 @@ class Offer(models.Model):
 
 class Experience(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    slug = models.SlugField(max_length=100, unique=True)
     country = models.ForeignKey(Country,on_delete=models.CASCADE)
     description = models.TextField(max_length=4000)
     image = ImageField( manual_crop="")
@@ -64,6 +67,7 @@ class Experience(models.Model):
 
 class Dining(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    slug = models.SlugField(max_length=100, unique=True)
     heading = models.TextField(max_length=100, blank=False)
     image = ImageField( manual_crop="")
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE) 
@@ -77,6 +81,7 @@ class Dining(models.Model):
 
 class Wedding(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField(max_length=4000, blank=False)
 
     def __str__(self):
@@ -84,6 +89,7 @@ class Wedding(models.Model):
 
 class Sustainability(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    slug = models.SlugField(max_length=100, unique=True)
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE) 
     description = models.TextField(max_length=4000)
 
