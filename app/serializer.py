@@ -1,13 +1,10 @@
 from rest_framework import serializers
 from .models import *
 
-# class ProductSerializer(serializers.ModelSerializer):
-#     category_name = serializers.CharField(source='category.name')
-#     category_slug = serializers.CharField(source='category.slug')
-#     category_id = serializers.IntegerField(source='category.id')
-#     class Meta:
-#         model = Product
-#         fields = ['id', 'name', 'slug', 'image', 'image2', 'image3', 'description','new_price', 'old_price', 'is_available','category_name','get_url','category_slug','category_id']
+class VillaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Villa
+        fields = ['id', 'name', 'slug','price', 'image', 'image2', 'image3','image4','heading' 'description', 'offer1','offer2','offer3','offer4','roomSize', 'capacity','is_available']
 
 # class CategorySerializer(serializers.ModelSerializer):
 #     products = ProductSerializer(many=True, read_only=True)
