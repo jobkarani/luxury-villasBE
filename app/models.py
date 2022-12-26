@@ -37,8 +37,17 @@ class Blogs(models.Model):
         return self.heading
 
 class Destination(models.Model):
-    country = models.TextField(max_length=500)
+    country = models.CharField(max_length=100, blank=False)
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.country
+
+class Offer(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
+    price = models.FloatField()
+    description = models.TextField(max_length=4000)
+
+    def __str__(self):
+        return self.name
