@@ -111,6 +111,13 @@ def get_wedding(request):
         serializer = WeddingSerializer(wedding, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getWeddingDetails(request, wedding_id):
+    if request.method == "GET":
+        wedding = Dining.objects.filter(id = wedding_id)
+        serializer = WeddingSerializer(wedding, many=True)
+        return Response(serializer.data)
+
 @api_view(['GET',])
 def get_sustainability(request):
     if request.method == "GET":
