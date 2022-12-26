@@ -21,7 +21,7 @@ def index(request):
 
 
 @api_view(['GET',])
-def villas(request):
+def get_villas(request):
     if request.method == "GET":
         villas = Villa.objects.all()
         serializer = VillaSerializer(villas, many=True)
