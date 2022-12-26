@@ -12,7 +12,7 @@ class VillaSerializer(serializers.ModelSerializer):
 #         model = Category
 #         fields = ['id', 'name', 'slug', 'products']
 
-# class BlogsSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Blogs
-#         fields = ['id', 'image', 'heading', 'created_at', 'text']
+class BlogsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blogs
+        fields = ['id', 'image', 'heading', 'created_at', 'text']
