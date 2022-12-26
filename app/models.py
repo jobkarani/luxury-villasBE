@@ -36,4 +36,9 @@ class Blogs(models.Model):
     def __str__(self):
         return self.heading
 
+class Destination(models.Model):
+    country = models.TextField(max_length=500)
+    villa = models.ForeignKey(Villa,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.country
