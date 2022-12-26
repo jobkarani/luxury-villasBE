@@ -35,3 +35,8 @@ class WeddingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wedding
         fields = ['id', 'name', 'slug', 'description']
+
+class SustainabilitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sustainability
+        fields = ['id', 'name', 'slug', 'villa', 'description']
