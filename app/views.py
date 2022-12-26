@@ -83,6 +83,13 @@ def get_experience(request):
         serializer = ExperienceSerializer(experience, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getExperienceDetails(request, experience_id):
+    if request.method == "GET":
+        experience = Experience.objects.filter(id = experience_id)
+        serializer =ExperienceSerializer(experience, many=True)
+        return Response(serializer.data)
+
 @api_view(['GET',])
 def get_dining(request):
     if request.method == "GET":
