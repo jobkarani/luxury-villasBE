@@ -132,6 +132,14 @@ def getSustainabilityDetails(request, sustainability_id):
         serializer = SustainabilitySerializer(sustainability, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getVillasByCountry(request, country_id):
+    if request.method == "GET":
+        country = get_object_or_404(Country, id=country_id)
+        villa = Villa.objects.filter(country=country)
+        serializer = VillaSerializer(villa, many=True)
+        return Response(serializer.data)
+
 
 # @api_view(['GET'])
 # def getProductDetails(request, product_id):

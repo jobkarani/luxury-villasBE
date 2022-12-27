@@ -19,4 +19,5 @@ urlpatterns = [
     path('weddingDetails/<int:wedding_id>/', views.getWeddingDetails, name='Wedding Details' ),
     path('sustainability/', views.get_sustainability, name='sustainability'),
     path('sustainabilityDetails/<int:sustainability_id>/', views.getSustainabilityDetails, name='Sustainability Details' ),
+    path('countryVillas/<int:country_id>/', views.getVillasByCountry, name='Country Villas' ),
 ]
