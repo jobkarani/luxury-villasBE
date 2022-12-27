@@ -92,11 +92,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': os.path.join(BASE_DIR, 'db.postgresql'),
-        'NAME':'villas',
+        'NAME':'railway',
         'USER':'postgres',
-        'PASSWORD':'gerrit',
-        # 'HOST': 'containers-us-west-145.railway.app',
-        # 'PORT': '7758',
+        'PASSWORD':'b56AvYFLDDn6kGLNZ9F0',
+        'HOST': 'containers-us-west-28.railway.app',
+        'PORT': '6404',
     }
 }
 
@@ -105,9 +105,9 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 
-ALLOWED_HOSTS=['ahericaredbb.up.railway.app','127.0.0.1', 'https://ahericaredbb.up.railway.app/admin','http://localhost:4200']
+ALLOWED_HOSTS=['luxury-villasBE.up.railway.app','127.0.0.1', 'https://luxury-villasbe.up.railway.app/admin','http://localhost:4200']
 
-CSRF_TRUSTED_ORIGINS = ['https://ahericaredbb.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://luxury-villasbe.up.railway.app']
 
 UPLOADCARE = {  
     'pub_key': config('pub_key'),
