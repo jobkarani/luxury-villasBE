@@ -15,7 +15,7 @@ class CountrySerializer(serializers.ModelSerializer):
     villas = VillaSerializer(many=True, read_only=True)
     class Meta:
         model = Country
-        fields = ['id', 'name','villas']
+        fields = ['id', 'name','image', 'catchy_phrase', 'tag', 'villas']
 
 class OfferSerializer(serializers.ModelSerializer):
     class Meta:

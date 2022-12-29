@@ -5,6 +5,9 @@ from pyuploadcare.dj.models import ImageField
 
 class Country(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    image = ImageField( manual_crop="",default="")
+    catchy_phrase = models.CharField(max_length=100, blank=False, default="Land of the Free")
+    tag = models.CharField(max_length=100, blank=False, default="")
 
     def __str__(self):
         return self.name
