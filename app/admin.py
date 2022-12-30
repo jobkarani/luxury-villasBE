@@ -5,6 +5,7 @@ from app.models import *
 # Register your models here.
 
 admin.site.register(Villa)
+admin.site.register(Tag)
 admin.site.register(Country)
 admin.site.register(Blogs)
 admin.site.register(Offer)

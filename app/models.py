@@ -2,12 +2,17 @@ from django.db import models
 from django.urls import reverse
 from pyuploadcare.dj.models import ImageField
 # Create your models here.
+class Tag(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+
+    def __str__(self):
+        return self.name
 
 class Country(models.Model):
     name = models.CharField(max_length=100, blank=False)
     image = ImageField( manual_crop="",default="")
-    catchy_phrase = models.CharField(max_length=100, blank=False, default="Land of the Free")
-    tag = models.CharField(max_length=100, blank=False, default="")
+    catchy_phrase = models.CharField(max_length=100, blank=False, default="")
+    tag = models.ForeignKey(Tag,on_delete=models.CASCADE, default="")
 
     def __str__(self):
         return self.name
