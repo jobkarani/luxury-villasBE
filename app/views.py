@@ -77,20 +77,6 @@ def getOfferDetails(request, offer_id):
         return Response(serializer.data)
 
 @api_view(['GET',])
-def get_experience(request):
-    if request.method == "GET":
-        experience = Experience.objects.all()
-        serializer = ExperienceSerializer(experience, many=True)
-        return Response(serializer.data)
-
-@api_view(['GET'])
-def getExperienceDetails(request, experience_id):
-    if request.method == "GET":
-        experience = Experience.objects.filter(id = experience_id)
-        serializer =ExperienceSerializer(experience, many=True)
-        return Response(serializer.data)
-
-@api_view(['GET',])
 def get_dining(request):
     if request.method == "GET":
         dining = Dining.objects.all()
@@ -139,21 +125,3 @@ def getVillasByCountry(request, country_id):
         villa = Villa.objects.filter(country=country)
         serializer = VillaSerializer(villa, many=True)
         return Response(serializer.data)
-
-
-# @api_view(['GET'])
-# def getProductDetails(request, product_id):
-#     if request.method == "GET":
-#         product= Product.objects.filter(id = product_id)
-#         serializer = ProductSerializer(product, many=True)
-#         return Response(serializer.data)
-
-
-# @api_view(['GET'])
-# def getProductsByCategory(request, category_id):
-#     if request.method == "GET":
-#         category = get_object_or_404(Category, id=category_id)
-#         products = Product.objects.filter(category=category)
-#         serializer = ProductSerializer(products, many=True)
-#         return Response(serializer.data)
-

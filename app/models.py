@@ -11,8 +11,11 @@ class Tag(models.Model):
 class Country(models.Model):
     name = models.CharField(max_length=100, blank=False)
     image = ImageField( manual_crop="",default="")
+    image_toper = ImageField( manual_crop="",default="")
     catchy_phrase = models.CharField(max_length=100, blank=False, default="")
     tag = models.ForeignKey(Tag,on_delete=models.CASCADE, default="")
+    description1 = models.TextField(max_length=1500, default="")
+    description2 = models.TextField(max_length=1500, default="")
 
     def __str__(self):
         return self.name
@@ -59,14 +62,14 @@ class Offer(models.Model):
     def __str__(self):
         return self.name
 
-class Experience(models.Model):
-    name = models.CharField(max_length=100, blank=False)
-    country = models.ForeignKey(Country,on_delete=models.CASCADE)
-    description = models.TextField(max_length=4000)
-    image = ImageField( manual_crop="")
+# class Experience(models.Model):
+#     name = models.CharField(max_length=100, blank=False)
+#     country = models.ForeignKey(Country,on_delete=models.CASCADE)
+#     description = models.TextField(max_length=4000)
+#     image = ImageField( manual_crop="")
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 class Dining(models.Model):
     name = models.CharField(max_length=100, blank=False)
