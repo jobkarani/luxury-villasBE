@@ -11,11 +11,17 @@ class BlogsSerializer(serializers.ModelSerializer):
         model = Blogs
         fields = ['id', 'image', 'heading', 'created_at', 'text']
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ['id', 'name']
+
 class CountrySerializer(serializers.ModelSerializer):
+    tag_name = serializers.CharField(source='tag.name')
     villas = VillaSerializer(many=True, read_only=True)
     class Meta:
         model = Country
-        fields = ['id', 'name','image', 'catchy_phrase', 'tag', 'villas']
+        fields = ['id', 'name','image', 'catchy_phrase', 'tag_name', 'villas']
 
 class OfferSerializer(serializers.ModelSerializer):
     class Meta:
