@@ -1,3 +1,5 @@
+import datetime
+import time
 from django.db import models
 from django.urls import reverse
 from pyuploadcare.dj.models import ImageField
@@ -10,12 +12,12 @@ class Tag(models.Model):
 
 class Country(models.Model):
     name = models.CharField(max_length=100, blank=False)
-    image = ImageField( manual_crop="",default="")
-    image_toper = ImageField( manual_crop="",default="")
-    catchy_phrase = models.CharField(max_length=100, blank=False, default="")
-    tag = models.ForeignKey(Tag,on_delete=models.CASCADE, default="")
-    description1 = models.TextField(max_length=1500, default="")
-    description2 = models.TextField(max_length=1500, default="")
+    image = ImageField( manual_crop="")
+    image_toper = ImageField( manual_crop="")
+    catchy_phrase = models.CharField(max_length=100, blank=False)
+    tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
+    description1 = models.TextField(max_length=1500)
+    description2 = models.TextField(max_length=1500)
 
     def __str__(self):
         return self.name
@@ -30,12 +32,15 @@ class Villa(models.Model):
     image4 = ImageField(blank=True,null=True, manual_crop="")
     heading = models.TextField(max_length=500)
     description = models.TextField(max_length=4000)
-    offer1 = models.TextField(max_length=500)
-    offer2 = models.TextField(max_length=500, blank=True)
-    offer3 = models.TextField(max_length=500, blank=True)
-    offer4 = models.TextField(max_length=500, blank=True)
-    roomSize = models.IntegerField()
-    capacity = models.IntegerField()
+    feature1 = models.TextField(max_length=500)
+    feature2 = models.TextField(max_length=500, blank=True)
+    feature3 = models.TextField(max_length=500, blank=True)
+    feature4 = models.TextField(max_length=500, blank=True)
+    feature5 = models.TextField(max_length=500, blank=True)
+    check_in = models.TimeField(auto_now=False, auto_now_add=False,null=True, blank=True)
+    check_out = models.TimeField(auto_now=False, auto_now_add=False,null=True, blank=True)
+    complimentary1 = models.TextField(max_length=500, blank=True)
+    complimentary2 = models.TextField(max_length=500, blank=True)
     is_available = models.BooleanField(default = True)
 
     class Meta:
@@ -61,15 +66,6 @@ class Offer(models.Model):
 
     def __str__(self):
         return self.name
-
-# class Experience(models.Model):
-#     name = models.CharField(max_length=100, blank=False)
-#     country = models.ForeignKey(Country,on_delete=models.CASCADE)
-#     description = models.TextField(max_length=4000)
-#     image = ImageField( manual_crop="")
-
-#     def __str__(self):
-#         return self.name
 
 class Dining(models.Model):
     name = models.CharField(max_length=100, blank=False)
