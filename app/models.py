@@ -60,9 +60,25 @@ class Blogs(models.Model):
 
 class Offer(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    country = models.ForeignKey(Country,on_delete=models.CASCADE, default="")
+    villa = models.ForeignKey(Villa,on_delete=models.CASCADE, default="") 
     image = ImageField( manual_crop="")
-    price = models.FloatField()
+    old_price = models.FloatField()
     description = models.TextField(max_length=4000)
+    inclusion1 = models.TextField(max_length=500, default="")
+    inclusion2 = models.TextField(max_length=500, blank=True)
+    inclusion3 = models.TextField(max_length=500, blank=True)
+    inclusion4 = models.TextField(max_length=500, blank=True)
+    inclusion5 = models.TextField(max_length=500, blank=True)
+    complimentary1 = models.TextField(max_length=500, blank=True)
+    complimentary2 = models.TextField(max_length=500, blank=True)
+    complimentary3 = models.TextField(max_length=500, blank=True)
+    complimentary4 = models.TextField(max_length=500, blank=True)
+    term1 = models.TextField(max_length=500, blank=True)
+    term2 = models.TextField(max_length=500, blank=True)
+    term3 = models.TextField(max_length=500, blank=True)
+    term4 = models.TextField(max_length=500, blank=True)
+    term5 = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
         return self.name
