@@ -2,9 +2,10 @@ from rest_framework import serializers
 from .models import *
 
 class VillaSerializer(serializers.ModelSerializer):
+    country_name = serializers.CharField(source='country.name')
     class Meta:
         model = Villa
-        fields = ['id', 'name', 'country', 'price', 'image', 'image2', 'image3','image4','heading', 'description', 'feature1','feature2','feature3','feature4','feature5', 'check_in','check_out', 'complimentary1', 'complimentary2', 'is_available']
+        fields = ['id', 'name', 'country','country_name', 'price', 'image', 'image2', 'image3','image4','heading', 'description', 'feature1','feature2','feature3','feature4','feature5', 'check_in','check_out', 'complimentary1', 'complimentary2', 'is_available']
 
 class BlogsSerializer(serializers.ModelSerializer):
     class Meta:
