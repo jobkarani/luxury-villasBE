@@ -63,6 +63,7 @@ class Offer(models.Model):
     country = models.ForeignKey(Country,on_delete=models.CASCADE, default="")
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE, default="") 
     image = ImageField( manual_crop="")
+    offerDetails_image = ImageField( manual_crop="", default="")
     old_price = models.FloatField()
     description = models.TextField(max_length=4000)
     inclusion1 = models.TextField(max_length=500, default="")

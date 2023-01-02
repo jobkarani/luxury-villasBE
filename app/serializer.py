@@ -29,7 +29,7 @@ class OfferSerializer(serializers.ModelSerializer):
     villa_name = serializers.CharField(source='villa.name')
     class Meta:
         model = Offer
-        fields = ['id', 'name', 'country','country_name', 'villa', 'villa_name', 'image', 'old_price','description', 'inclusion1', 'inclusion2', 'inclusion3','inclusion4','inclusion5','complimentary1','complimentary2','complimentary3','complimentary4','term1','term2','term3','term4','term5']
+        fields = ['id', 'name', 'country','country_name', 'villa', 'villa_name', 'image', 'offerDetails_image', 'old_price','description', 'inclusion1', 'inclusion2', 'inclusion3','inclusion4','inclusion5','complimentary1','complimentary2','complimentary3','complimentary4','term1','term2','term3','term4','term5']
 
 class DiningSerializer(serializers.ModelSerializer):
     class Meta:
