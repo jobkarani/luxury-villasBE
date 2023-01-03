@@ -88,11 +88,16 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=100, blank=False)
     heading = models.TextField(max_length=100, blank=False)
     image = ImageField( manual_crop="")
-    villa = models.ForeignKey(Villa,on_delete=models.CASCADE) 
+    catchy_phrase = models.CharField(max_length=100, blank=False,default="")
     description = models.TextField(max_length=4000)
     timeline = models.TextField(max_length=1000, blank=False)
     email = models.EmailField(max_length=254,blank=False)
     phone = models.CharField(max_length=100)
+    info1 = models.TextField(max_length=100, blank=False, default="")
+    info1 = models.TextField(max_length=100, blank=False, default="")
+    gallery1 = ImageField(blank=True, null=True, manual_crop="", default="")
+    gallery2 = ImageField(blank=True, null=True, manual_crop="", default="")
+    gallery3 = ImageField(blank=True, null=True, manual_crop="", default="")
 
     def __str__(self):
         return self.name
