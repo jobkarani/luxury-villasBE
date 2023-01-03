@@ -22,7 +22,7 @@ class CountrySerializer(serializers.ModelSerializer):
     villas = VillaSerializer(many=True, read_only=True)
     class Meta:
         model = Country
-        fields = ['id', 'name','image','image_toper', 'video_file', 'catchy_phrase', 'tag_name', 'villas','description1','description2']
+        fields = ['id', 'name','image','image_toper', 'catchy_phrase', 'tag_name', 'villas','description1','description2']
 
 class OfferSerializer(serializers.ModelSerializer):
     country_name = serializers.CharField(source='country.name')
@@ -33,7 +33,7 @@ class OfferSerializer(serializers.ModelSerializer):
 
 class DiningSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Dining
+        model = Restaurant
         fields = ['id', 'name','heading', 'image','villa', 'description','timeline','email', 'phone']
 
 class WeddingSerializer(serializers.ModelSerializer):

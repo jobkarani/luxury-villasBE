@@ -14,7 +14,6 @@ class Country(models.Model):
     name = models.CharField(max_length=100, blank=False)
     image = ImageField( manual_crop="")
     image_toper = ImageField( manual_crop="")
-    video_file = models.FileField(upload_to='videos/%y',blank=True,null=True)
     catchy_phrase = models.CharField(max_length=100, blank=False)
     tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
     description1 = models.TextField(max_length=1500)
@@ -85,7 +84,7 @@ class Offer(models.Model):
     def __str__(self):
         return self.name
 
-class Dining(models.Model):
+class Restaurant(models.Model):
     name = models.CharField(max_length=100, blank=False)
     heading = models.TextField(max_length=100, blank=False)
     image = ImageField( manual_crop="")
