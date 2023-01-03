@@ -34,7 +34,7 @@ class OfferSerializer(serializers.ModelSerializer):
 class DiningSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
-        fields = ['id', 'name','heading', 'image','villa', 'description','timeline','email', 'phone']
+        fields = ['id', 'name','heading', 'image','catchy_phrase', 'description','timeline','email', 'phone', 'info1','gallery1', 'gallery2', 'gallery3']
 
 class WeddingSerializer(serializers.ModelSerializer):
     class Meta:
