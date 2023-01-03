@@ -94,7 +94,6 @@ class Restaurant(models.Model):
     email = models.EmailField(max_length=254,blank=False)
     phone = models.CharField(max_length=100)
     info1 = models.TextField(max_length=100, blank=False, default="")
-    info2 = models.TextField(max_length=100, blank=False, default="")
     gallery1 = ImageField(blank=True, null=True, manual_crop="", default="")
     gallery2 = ImageField(blank=True, null=True, manual_crop="", default="")
     gallery3 = ImageField(blank=True, null=True, manual_crop="", default="")
