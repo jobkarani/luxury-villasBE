@@ -8,9 +8,10 @@ class VillaSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'country','country_name', 'price', 'image', 'image2', 'image3','image4','heading', 'description', 'feature1','feature2','feature3','feature4','feature5', 'check_in','check_out', 'complimentary1', 'complimentary2', 'is_available']
 
 class BlogsSerializer(serializers.ModelSerializer):
+    tag_name = serializers.CharField(source='tag.name')
     class Meta:
         model = Blogs
-        fields = ['id','image_cover', 'image', 'heading', 'tag', 'text1','text2','text3']
+        fields = ['id','image_cover', 'image', 'heading', 'tag','tag_name', 'text1','text2','text3']
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
