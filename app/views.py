@@ -91,30 +91,16 @@ def getDiningDetails(request, dining_id):
         return Response(serializer.data)
 
 @api_view(['GET',])
-def get_wedding(request):
-    if request.method == "GET":
-        wedding = Wedding.objects.all()
-        serializer = WeddingSerializer(wedding, many=True)
-        return Response(serializer.data)
-
-@api_view(['GET'])
-def getWeddingDetails(request, wedding_id):
-    if request.method == "GET":
-        wedding = Wedding.objects.filter(id = wedding_id)
-        serializer = WeddingSerializer(wedding, many=True)
-        return Response(serializer.data)
-
-@api_view(['GET',])
 def get_sustainability(request):
     if request.method == "GET":
-        sustainability = Sustainability.objects.all()
+        sustainability = Contact.objects.all()
         serializer = SustainabilitySerializer(sustainability, many=True)
         return Response(serializer.data)
 
 @api_view(['GET'])
 def getSustainabilityDetails(request, sustainability_id):
     if request.method == "GET":
-        sustainability = Sustainability.objects.filter(id = sustainability_id)
+        sustainability = Contact.objects.filter(id = sustainability_id)
         serializer = SustainabilitySerializer(sustainability, many=True)
         return Response(serializer.data)
 

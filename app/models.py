@@ -50,10 +50,13 @@ class Villa(models.Model):
         return self.name
 
 class Blogs(models.Model):
+    image_cover = ImageField(blank=True, null=True, manual_crop="", default="")
     image = ImageField( manual_crop="")
     heading = models.CharField(max_length=100, blank=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    text = models.TextField(max_length=3000, blank=False)
+    tag = models.ForeignKey(Tag,on_delete=models.CASCADE, default="")
+    text1 = models.TextField(max_length=3000, blank=False)
+    text2 = models.TextField(max_length=3000,null=True, blank=False, default="")
+    text3 = models.TextField(max_length=3000,null=True, blank=False, default="")
 
     def __str__(self):
         return self.heading
@@ -101,14 +104,8 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
-class Wedding(models.Model):
-    name = models.CharField(max_length=100, blank=False)
-    description = models.TextField(max_length=4000, blank=False)
 
-    def __str__(self):
-        return self.name
-
-class Sustainability(models.Model):
+class Contact(models.Model):
     name = models.CharField(max_length=100, blank=False)
     villa = models.ForeignKey(Villa,on_delete=models.CASCADE) 
     description = models.TextField(max_length=4000)

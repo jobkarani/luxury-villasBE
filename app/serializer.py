@@ -10,7 +10,7 @@ class VillaSerializer(serializers.ModelSerializer):
 class BlogsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blogs
-        fields = ['id', 'image', 'heading', 'created_at', 'text']
+        fields = ['id','image_cover', 'image', 'heading', 'tag', 'text1','text2','text3']
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,12 +36,7 @@ class DiningSerializer(serializers.ModelSerializer):
         model = Restaurant
         fields = ['id', 'name','heading', 'image','catchy_phrase', 'description','timeline','email', 'phone', 'info1','gallery1', 'gallery2', 'gallery3']
 
-class WeddingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Wedding
-        fields = ['id', 'name', 'description']
-
 class SustainabilitySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Sustainability
+        model = Contact
         fields = ['id', 'name', 'villa', 'description']
