@@ -43,7 +43,7 @@ class SustainabilitySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'villa', 'description']
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user_name = serializers.CharField(source='user.name')
+    user_name = serializers.CharField(source='user.username')
     class Meta:
         model = Profile
         fields = ['id','user','user_name', 'firstname','lastname', 'image', 'email','phone','date_joined']
