@@ -16,4 +16,5 @@ urlpatterns = [
     path('sustainability/', views.get_sustainability, name='sustainability'),
     path('sustainabilityDetails/<int:sustainability_id>/', views.getSustainabilityDetails, name='Sustainability Details' ),
     path('countryVillas/<int:country_id>/', views.getVillasByCountry, name='Country Villas' ),
+    path('signUp/', views.create_profile, name='create_profile'),
 ]
