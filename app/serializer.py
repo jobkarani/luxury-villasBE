@@ -41,3 +41,8 @@ class SustainabilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ['id', 'name', 'villa', 'description']
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id','user', 'firstname','lastname', 'image', 'email','phone','date_joined']

@@ -3,6 +3,7 @@ import time
 from django.db import models
 from django.urls import reverse
 from pyuploadcare.dj.models import ImageField
+from django.contrib.auth.models import User
 # Create your models here.
 class Tag(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -112,3 +113,32 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    image = ImageField( manual_crop="")
+    email = models.EmailField(max_length=256, null=True)
+    phone = models.CharField(max_length=100)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    def save_profile(self):
+        self.save()
+
+    def update(self):
+        self.save()
+
+    def create_profile(self):
+        self.save()
+
+    def update_profile(self):
+        self.update()
+
+    @classmethod
+    def get_profile_by_user(cls, user):
+        profile = cls.objects.filter(user=user)
+        return profile
+
+    def __str__(self):
+        return self.user.username
