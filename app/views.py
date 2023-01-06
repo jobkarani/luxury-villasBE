@@ -14,6 +14,9 @@ from .pagination import *
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 
 # Create your views here.
 
@@ -113,16 +116,6 @@ def getVillasByCountry(request, country_id):
         serializer = VillaSerializer(villa, many=True)
         return Response(serializer.data)
 
-@api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
-def create_profile(request):
-    if request.method == "POST":
-        serializer = ProfileSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def view_profile(request, profile_id):
@@ -130,3 +123,15 @@ def view_profile(request, profile_id):
         profile = get_object_or_404(Profile, id=profile_id)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
+
+
+
+
+class MyObtainTokenPairView(TokenObtainPairView):
+    permission_classes = (AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
