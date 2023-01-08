@@ -117,6 +117,19 @@ def getVillasByCountry(request, country_id):
         return Response(serializer.data)
 
 @api_view(['GET'])
+def getCountriesAndVillas(request):
+    if request.method == "GET":
+        countries = Country.objects.all().prefetch_related('villa_set')
+        data = []
+        for country in countries:
+            villa = Villa.objects.filter(country=country)
+            serializer = CountrySerializer(country)
+            country_data = serializer.data
+            country_data['villa'] = VillaSerializer(villa, many=True).data
+            data.append(country_data)
+        return Response(data)
+
+@api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def view_profile(request, profile_id):
     if request.method == "GET":
