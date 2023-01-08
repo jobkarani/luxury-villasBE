@@ -13,7 +13,7 @@ class Tag(models.Model):
 
 class Country(models.Model):
     name = models.CharField(max_length=100, blank=False)
-    image = ImageField( manual_crop="")
+    image = ImageField( manual_crop="320x147")
     image_toper = ImageField( manual_crop="")
     catchy_phrase = models.CharField(max_length=100, blank=False)
     tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
