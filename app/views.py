@@ -128,15 +128,24 @@ def getCountriesAndVillas(request):
             country_data['villa'] = VillaSerializer(villa, many=True).data
             data.append(country_data)
         return Response(data)
+    
+@api_view(['POST'])
+def create_booking(request):
+    if request.method == "POST":
+        serializer = BookingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def view_profile(request, profile_id):
-    if request.method == "GET":
+    if request.method == "GET" and request.user.is_authenticated:
         profile = get_object_or_404(Profile, id=profile_id)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
-
 
 
 

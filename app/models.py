@@ -143,3 +143,17 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Booking(models.Model):
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100, default="")
+    email = models.EmailField(max_length=256, null=True)
+    phone = models.CharField(max_length=100, default="")
+    villa = models.ForeignKey(Villa, on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    guestsnumber = models.IntegerField()
+    special_requests = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.email

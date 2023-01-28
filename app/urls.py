@@ -18,6 +18,7 @@ urlpatterns = [
     path('sustainability/', views.get_sustainability, name='sustainability'),
     path('sustainabilityDetails/<int:sustainability_id>/', views.getSustainabilityDetails, name='Sustainability Details' ),
     path('countryVillas/<int:country_id>/', views.getVillasByCountry, name='Country Villas' ),
+    path('bookings/', views.create_booking, name='create_booking'),
     path('profile/<int:profile_id>/', views.view_profile, name='view_profile'),
 
     path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
