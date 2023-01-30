@@ -47,12 +47,19 @@ class SustainabilitySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'villa', 'description']
 
 class BookingSerializer(serializers.ModelSerializer):
+    start_date = serializers.DateField(format='%Y-%m-%d')
+    end_date = serializers.DateField(format='%Y-%m-%d')
+
     class Meta:
         model = Booking
         fields = ['id', 'firstname', 'lastname', 'email', 'phone', 'start_date', 'end_date', 'guestsnumber', 'villa', 'special_requests']
 
-        start_date = serializers.DateField(input_formats=['%m/%d/%Y'])
-        end_date = serializers.DateField(input_formats=['%m/%d/%Y'])
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['start_date'] = datetime.strptime(data['start_date'], '%m/%d/%Y').strftime('%Y-%m-%d')
+        data['end_date'] = datetime.strptime(data['end_date'], '%m/%d/%Y').strftime('%Y-%m-%d')
+        return data
+        
 
 class ProfileSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.username')
