@@ -155,5 +155,8 @@ class Booking(models.Model):
     guestsnumber = models.IntegerField()
     special_requests = models.TextField(blank=True, null=True)
 
+    def save_booking(self):
+        self.save()
+
     def __str__(self):
         return self.email
