@@ -47,9 +47,35 @@ class SustainabilitySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'villa', 'description']
 
 class BookingSerializer(serializers.ModelSerializer):
+    start_date = serializers.DateTimeField(format="%m/%d/%Y")
+    end_date = serializers.DateTimeField(format="%m/%d/%Y")
     class Meta:
         model = Booking
         fields = ['id', 'firstname', 'lastname', 'email', 'phone', 'start_date', 'end_date', 'guestsnumber', 'villa', 'special_requests']
+
+        extra_kwargs = {
+            'firstname': {'required': True},
+            'lastname': {'required': True},
+            'email' : {'required' : True},
+            'phone' : {'required' : True},
+        }
+
+        def create(self, validated_data):
+            booking = Booking.objects.create(
+                first_name=validated_data['firstname'],
+                last_name=validated_data['lastname'],
+                phone=validated_data['phone'],
+                email=validated_data['email'],
+                start_date=validated_data['start_date'],
+                end_date=validated_data['end_date'],
+                guestsnumber=validated_data['guestsnumber'],
+                villa=validated_data['villa'],
+                special_requests=validated_data['special_requests']
+            )
+
+            booking.save()
+
+            return booking
 
 class ProfileSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.username')
