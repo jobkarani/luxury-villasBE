@@ -129,14 +129,14 @@ def getCountriesAndVillas(request):
             data.append(country_data)
         return Response(data)
     
-# @api_view(['POST'])
-# def create_booking(request):
-#     if request.method == "POST":
-#         serializer = BookingSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=201)
-#         return Response(serializer.errors, status=400)
+@api_view(['POST'])
+def create_booking(request):
+    if request.method == "POST":
+        serializer = BookingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 @api_view(['GET'])
@@ -157,8 +157,3 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny)
     serializer_class = RegisterSerializer
-
-class BookingView(generics.CreateAPIView):
-    queryset = Booking.objects.all()
-    permission_classes = (AllowAny)
-    serializer_class = BookingSerializer
