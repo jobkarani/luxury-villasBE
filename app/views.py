@@ -140,9 +140,8 @@ def create_booking(request):
 
 
 @api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
 def view_profile(request, profile_id):
-    if request.method == "GET" and request.user.is_authenticated:
+    if request.method == "GET":
         profile = get_object_or_404(Profile, id=profile_id)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
