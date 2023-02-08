@@ -47,9 +47,10 @@ class SustainabilitySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'villa', 'description']
 
 class BookingSerializer(serializers.ModelSerializer):
+    villa_name = serializers.CharField(source='villa.name')
     class Meta:
         model = Booking
-        fields = ['id', 'firstname', 'lastname', 'email', 'phone', 'start_date', 'end_date', 'guestsnumber', 'villa', 'special_requests']
+        fields = ['id', 'firstname', 'lastname', 'email', 'phone', 'start_date', 'end_date', 'guestsnumber', 'villa_name', 'special_requests']
 
 class ProfileSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.username')
