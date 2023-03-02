@@ -61,7 +61,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'user_name', 'firstname', 'lastname', 'image', 'email', 'phone', 'date_joined']
     
 
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
