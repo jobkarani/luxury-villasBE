@@ -94,11 +94,11 @@ DATABASES = {
         # 'NAME': os.path.join(BASE_DIR, 'db.postgresql'),
         'NAME':'railway',
         'USER':'postgres',
-        'PASSWORD':'OU2SIudmfSCA92o6uG1h',
-        'HOST': 'containers-us-west-86.railway.app',
-        'PORT': '6623',
+        'PASSWORD':'uTtMkjvz381Y8GKtyoI3',
+        'HOST': 'containers-us-west-118.railway.app',
+        'PORT': '5674',
     }
-    
+
 }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
