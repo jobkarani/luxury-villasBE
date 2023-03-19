@@ -54,7 +54,7 @@ class BookingSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('id', 'user', 'firstname', 'lastname', 'image', 'email', 'phone', 'date_joined')
+        fields = ('id', 'user', 'firstname', 'lastname', 'image', 'email', 'phone')
     
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
