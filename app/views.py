@@ -122,9 +122,7 @@ def getCountriesAndVillas(request):
             data.append(country_data)
         return Response(data)
     
-@login_required
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def create_booking(request):
     if request.method == "POST":
         serializer = BookingSerializer(data=request.data)
