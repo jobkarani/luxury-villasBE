@@ -1,9 +1,10 @@
 from rest_framework import status
 from rest_framework_jwt.settings import api_settings
 from rest_framework_jwt.serializers import JSONWebTokenSerializer
-from rest_framework_jwt.views import ObtainJSONWebToken
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import get_object_or_404, render
 
@@ -12,7 +13,6 @@ from .serializer import *
 from .pagination import *
 
 # Create your views here.
-
 def index(request):
     return render(request, 'products.html')
 
@@ -122,7 +122,9 @@ def getCountriesAndVillas(request):
             data.append(country_data)
         return Response(data)
     
+@login_required
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create_booking(request):
     if request.method == "POST":
         serializer = BookingSerializer(data=request.data)
@@ -138,6 +140,7 @@ def create_profile(request):
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @api_view(['GET'])
