@@ -19,9 +19,9 @@ urlpatterns = [
     path('sustainabilityDetails/<int:sustainability_id>/', views.getSustainabilityDetails, name='Sustainability Details' ),
     path('countryVillas/<int:country_id>/', views.getVillasByCountry, name='Country Villas' ),
     path('bookings/', views.create_booking, name='create_booking'),
-    path('profile/<int:profile_id>/', views.view_profile, name='view_profile'),
+    path('createProfile/', views.create_profile, name='create_profile'),
+    path('profile/<int:profile_id>/', views.profile_detail, name='profile_detail'),
 
-    path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
-    path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('register/', views.RegisterView.as_view(), name='auth_register'),
+    path('auth/register/', views.registration, name='auth_register'),
+    path('auth/login/', views.login, name='auth_login'),
 ]

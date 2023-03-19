@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig', 
     "rest_framework", 
+    'rest_framework_jwt',
     'cloudinary', 
     'simple_mail', 
 ]

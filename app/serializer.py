@@ -1,9 +1,6 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import *
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework.validators import UniqueValidator
-from django.contrib.auth.password_validation import validate_password
-
 
 class VillaSerializer(serializers.ModelSerializer):
     country_name = serializers.CharField(source='country.name')
@@ -55,55 +52,31 @@ class BookingSerializer(serializers.ModelSerializer):
         return Booking.objects.create(**validated_data)
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user_name = serializers.CharField(source='user.username')
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'user_name', 'firstname', 'lastname', 'image', 'email', 'phone', 'date_joined']
+        fields = ('id', 'user', 'firstname', 'lastname', 'image', 'email', 'phone', 'date_joined')
     
-
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-
-    @classmethod
-    def get_token(cls, user):
-        token = super(MyTokenObtainPairSerializer, cls).get_token(user)
-
-        # Add custom claims
-        token['username'] = user.username
-        return token
-
-class RegisterSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-            required=True,
-            validators=[UniqueValidator(queryset=User.objects.all())]
-            )
-
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-    password2 = serializers.CharField(write_only=True, required=True)
-
-    class Meta:
-        model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name')
-        extra_kwargs = {
-            'first_name': {'required': True},
-            'last_name': {'required': True}
-        }
-
-    def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError({"password": "Password fields didn't match."})
-
-        return attrs
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     def create(self, validated_data):
-        user = User.objects.create(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name']
-        )
+        user = validated_data.pop('user')
+        profile = Profile.objects.create(user=user, **validated_data)
+        return profile
+    
+    def update(self, instance, validated_data):
+        user = validated_data.pop('user')
+        instance.user = user
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+        return instance
+    
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'firstname', 'lastname', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
 
-        
-        user.set_password(validated_data['password'])
-        user.save()
-
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
         return user

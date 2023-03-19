@@ -1,22 +1,15 @@
 from rest_framework import status
+from rest_framework_jwt.settings import api_settings
+from rest_framework_jwt.serializers import JSONWebTokenSerializer
+from rest_framework_jwt.views import ObtainJSONWebToken
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework import permissions
+from rest_framework.decorators import api_view
 
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
-from django.db.models import Q
-# from simple_mail.mail import send_mail
 
 from app.models import *
 from .serializer import *
 from .pagination import *
-from rest_framework import generics
-from rest_framework.pagination import PageNumberPagination
-
-from rest_framework.permissions import AllowAny
-from rest_framework_simplejwt.views import TokenObtainPairView
-
 
 # Create your views here.
 
@@ -137,22 +130,45 @@ def create_booking(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+    
+@api_view(['POST'])
+def create_profile(request):
+    serializer = ProfileSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
-def view_profile(request, profile_id):
-    if request.method == "GET":
-        profile = get_object_or_404(Profile, id=profile_id)
+def profile_detail(request, profile_id):
+    try:
+        profile = Profile.objects.get(id=profile_id)
+    except Profile.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
 
 
+@api_view(['POST'])
+def registration(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        user = serializer.instance
+        payload = api_settings.JWT_PAYLOAD_HANDLER(user)
+        token = api_settings.JWT_ENCODE_HANDLER(payload)
+        return Response({'token': token}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class MyObtainTokenPairView(TokenObtainPairView):
-    permission_classes = (AllowAny,)
-    serializer_class = MyTokenObtainPairSerializer
-
-class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    permission_classes = (AllowAny)
-    serializer_class = RegisterSerializer
+@api_view(['POST'])
+def login(request):
+    serializer = JSONWebTokenSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.object.get('user') or request.user
+        payload = api_settings.JWT_PAYLOAD_HANDLER(user)
+        token = api_settings.JWT_ENCODE_HANDLER(payload)
+        return Response({'token': token})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
