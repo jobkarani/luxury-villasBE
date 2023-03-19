@@ -15,6 +15,9 @@ import os
 from pathlib import Path
 from decouple import config,Csv
 import dj_database_url
+import django
+from django.utils.translation import gettext
+django.utils.translation.ugettext = gettext
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
