@@ -50,13 +50,23 @@ class BookingSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Booking.objects.create(**validated_data)
+    
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
 
 class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
     class Meta:
         model = Profile
         fields = ('id', 'user', 'firstname', 'lastname', 'email', 'phone')
-    
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     def create(self, validated_data):
         user = validated_data.pop('user')
@@ -70,13 +80,3 @@ class ProfileSerializer(serializers.ModelSerializer):
             setattr(instance, key, value)
         instance.save()
         return instance
-    
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user

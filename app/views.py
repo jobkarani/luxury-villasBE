@@ -131,13 +131,27 @@ def create_booking(request):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
     
+# @api_view(['POST'])
+# def create_profile(request):
+#     serializer = ProfileSerializer(data=request.data)
+#     if serializer.is_valid():
+#         serializer.save(user=request.user)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(['POST'])
 def create_profile(request):
-    serializer = ProfileSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save(user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    user_serializer = UserSerializer(data=request.data['user'])
+    if user_serializer.is_valid():
+        user = user_serializer.save()
+        profile_data = request.data
+        profile_data['user'] = user.id
+        profile_serializer = ProfileSerializer(data=profile_data)
+        if profile_serializer.is_valid():
+            profile_serializer.save()
+            return Response(profile_serializer.data, status=status.HTTP_201_CREATED)
+    return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
