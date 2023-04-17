@@ -119,7 +119,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    email = models.EmailField(max_length=256, null=True)
     phone = models.CharField(max_length=100)
 
     def save_profile(self):

@@ -66,17 +66,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'user', 'firstname', 'lastname', 'email', 'phone')
+        fields = ('id', 'user', 'firstname', 'lastname', 'phone')
 
     def create(self, validated_data):
-        user = validated_data.pop('user')
-        profile = Profile.objects.create(user=user, **validated_data)
-        return profile
-    
-    def update(self, instance, validated_data):
-        user = validated_data.pop('user')
-        instance.user = user
-        for key, value in validated_data.items():
-            setattr(instance, key, value)
-        instance.save()
-        return instance
+        return Profile.objects.create(**validated_data) 
