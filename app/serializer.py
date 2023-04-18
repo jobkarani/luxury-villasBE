@@ -62,7 +62,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = serializers.CharField(source='user.username')
 
     class Meta:
         model = Profile

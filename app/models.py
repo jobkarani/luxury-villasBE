@@ -124,20 +124,6 @@ class Profile(models.Model):
     def save_profile(self):
         self.save()
 
-    def update(self):
-        self.save()
-
-    def create_profile(self):
-        self.save()
-
-    def update_profile(self):
-        self.update()
-
-    @classmethod
-    def get_profile_by_user(cls, user):
-        profile = cls.objects.filter(user=user)
-        return profile
-
     def __str__(self):
         return self.user.username
 
